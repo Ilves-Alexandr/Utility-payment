@@ -39,6 +39,12 @@ app.use(express.json());
 // Обслуживание файлов из папки build
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
+// Обработка всех запросов и возврат index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
+
+
 // Маршруты
 app.use('/api/users', auth);
 app.use('/api/posts', posts);
