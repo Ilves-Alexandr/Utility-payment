@@ -68,6 +68,7 @@ app.use((req, res, next) => {
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
+console.log(path.join(__dirname, 'client', 'build'));
 
 // Запуск сервера
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
