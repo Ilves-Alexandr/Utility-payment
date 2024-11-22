@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://utility-payment1.onrender.com", 
+  "homepage": "https://utility-payment1.onrender.com",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -19,6 +19,9 @@
     "web-vitals": "^2.1.4",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": "18.20.5"
   },
   "scripts": {
     "start": "react-scripts start",
