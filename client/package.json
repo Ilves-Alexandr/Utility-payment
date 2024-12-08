@@ -16,9 +16,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4"
+    "web-vitals": "^2.1.4"
   },
   "engines": {
     "node": "18.20.5"
@@ -46,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
   }
 }
