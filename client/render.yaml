@@ -1,5 +1,5 @@
 build:
   commands:
-    - npm install --legacy-peer-deps
-    - npm install -D webpack-cli
+    - npm install
+    - npm install -D webpack-cli -y
     - npm run build
