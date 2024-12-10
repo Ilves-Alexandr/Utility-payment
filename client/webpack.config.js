@@ -3,8 +3,8 @@ const path = require('path');
 module.exports = {
     entry: './src/index.js', // Точка входа
     output: {
-        path: path.resolve(__dirname, 'build'), // Папка для сборки
         filename: 'bundle.js', // Имя результирующего файла
+        path: path.resolve(__dirname, 'build'), // Папка для сборки
     },
     mode: 'production',
     module: {
