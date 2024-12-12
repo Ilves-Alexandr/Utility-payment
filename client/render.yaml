@@ -1,5 +1,6 @@
 build:
   commands:
+    - cd client
     - npm install
     - npm install --save-dev webpack-cli
     - npm run build
