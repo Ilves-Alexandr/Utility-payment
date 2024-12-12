@@ -66,7 +66,7 @@ app.use((req, res, next) => {
 
 // Любой другой маршрут отправляет `index.html`
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
 });
 console.log(path.join(__dirname, 'client', 'build'));
 
