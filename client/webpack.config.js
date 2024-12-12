@@ -4,7 +4,7 @@ module.exports = {
     entry: './src/index.js', // Точка входа
     output: {
         filename: 'bundle.js', // Имя результирующего файла
-        path: path.resolve(__dirname, 'build'), // Папка для сборки
+        path: path.resolve(__dirname, 'dist'), // Папка для сборки
     },
     mode: 'production',
     module: {
