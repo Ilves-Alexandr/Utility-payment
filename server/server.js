@@ -20,13 +20,6 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error(err));
 
-// Настройка CORS
-// const corsOptions = {
-//   origin: 'http://localhost:3000', // Разрешите доступ только с этого домена
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   credentials: true, // Если вы используете куки
-// };
-// app.use(cors(corsOptions));
 app.use(cors({
   origin: '*', // Укажите источник или используйте '*'
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -44,6 +37,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
+// Любой другой маршрут отправляет `index.html`
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 
 // Маршруты
 app.use('/api/users', auth);
@@ -63,12 +60,6 @@ app.use((req, res, next) => {
   console.log(`CORS policy check for ${req.method} ${req.url}`);
   next();
 });
-
-// Любой другой маршрут отправляет `index.html`
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
-});
-console.log(path.join(__dirname, 'client', 'dist'));
 
 // Запуск сервера
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
