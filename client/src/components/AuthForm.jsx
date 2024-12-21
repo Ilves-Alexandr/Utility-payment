@@ -16,7 +16,7 @@ const AuthForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = !isRegister
+      const response = isRegister
         ? await axios.post(`${API_URL}/api/users/register`, { username, email, password })
         : await axios.post(`${API_URL}/api/users/login`, { email, password });
 
@@ -43,12 +43,12 @@ const AuthForm = () => {
         </Button>
         <Button
           component={Link}
-          to={!isRegister ? '/login' : '/register'}  // Условная ссылка на страницу
+          to={isRegister ? '/login' : '/register'}  // Условная ссылка на страницу
           variant="contained"
           color="primary"
           onClick={() => setIsRegister(!isRegister)}  // Переключение состояния при клике
         >
-          {!isRegister ? 'Авторизация' : 'Регистрация'}
+          {isRegister ? 'Авторизация' : 'Регистрация'}
         </Button>
         
         <Button component={Link} variant="contained" to="/posts" color="primary">
@@ -77,10 +77,10 @@ const AuthForm = () => {
         }}
       >
         <Typography variant="h4" align="center">
-          {!isRegister ? 'Регистрация' : 'Авторизация'}
+          {isRegister ? 'Регистрация' : 'Авторизация'}
         </Typography>
 
-        {!isRegister && (
+        {isRegister && (
           <TextField
             label="Username"
             variant="outlined"
@@ -111,7 +111,7 @@ const AuthForm = () => {
         />
 
         <Button variant="contained" color="primary" type="submit" fullWidth>
-          {!isRegister ? 'Регистрация' : 'Авторизация'}
+          {isRegister ? 'Регистрация' : 'Авторизация'}
         </Button>
 
         {error && (

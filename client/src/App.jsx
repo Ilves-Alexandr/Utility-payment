@@ -18,8 +18,8 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/register" element={<AuthForm isRegister={true} />} />
-        <Route path="/login" element={<AuthForm isRegister={false} />} />
+        <Route path="/register" element={<AuthForm /*isRegister={true} */ />} />
+        <Route path="/login" element={<AuthForm /*isRegister={false}*/ />} />
         <Route path="/transactions" element={<><TransactionList/><AddTransaction /></>} />
         <Route path="/tgks" element={<><TgkList/><AddTgk /></>} />
         <Route path="/waters" element={<><WaterList/><AddWater /></>} />
