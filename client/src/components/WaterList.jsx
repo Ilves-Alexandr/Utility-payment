@@ -146,8 +146,8 @@ export default WaterList;
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import TransactionItem from './WaterItem';
-import EditTransaction from './EditWater';
+import WaterItem from './WaterItem';
+import EditWater from './EditWater';
 import { Button, Typography, List, ListItem, Divider, Container, Box } from '@mui/material';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -160,9 +160,9 @@ const WaterList = ({ isAuthenticated }) => {
   const [editingTransactionId, setEditingTransactionId] = useState(null);
   const [error, setError] = useState('');
 
-  const fetchTransactions = async () => {
+  const fetchWaters = async () => {
     try {
-      const res = await axios.get(`${API_URL}/api/transactions`, {
+      const res = await axios.get(`${API_URL}/api/waters`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -180,12 +180,12 @@ const WaterList = ({ isAuthenticated }) => {
   };
 
   useEffect(() => {
-    fetchTransactions();
+    fetchWaters();
   }, []);
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API_URL}/api/transaction/${id}`, {
+      await axios.delete(`${API_URL}/api/water/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -201,7 +201,7 @@ const WaterList = ({ isAuthenticated }) => {
   };
 
   const handleUpdate = async () => {
-    await fetchTransactions();
+    await fetchWaters();
     setEditingTransactionId(null);
   };
 
@@ -220,17 +220,14 @@ const WaterList = ({ isAuthenticated }) => {
         <Button component={Link} to={!isAuthenticated ? "/login" : "/register"} variant="contained" color="primary">
           {!isAuthenticated ? 'Авторизация' : 'Регистрация'}
         </Button>
-        <Button component={Link} to="/posts" variant="contained" color="primary">Заметки</Button>
-        <Button component={Link} to="/tgks" variant="contained" color="primary">ТГК</Button>
-        <Button component={Link} to="/waters" variant="contained" color="primary">Водоканал</Button>
+            <Button component={Link} to="/posts" variant="contained" color="primary">Заметки</Button>
+            <Button component={Link} to="/transactions" variant="contained" color="primary">ТНС</Button>
+            <Button component={Link} to="/tgks" variant="contained" color="primary">ТГК</Button>
       </Box>
-
-          <Typography variant="h4" gutterBottom>ТНС</Typography>
-
+          <Typography variant="h4" gutterBottom>Водоканал</Typography>
           <Box mb={3}>
             <Typography variant="h6">Общая сумма начисленных средств: {totalAmountBilled}</Typography>
           </Box>
-
           <Box mb={3}>
             <Typography variant="h6">Сальдо пользователей</Typography>
             <List>
@@ -241,7 +238,6 @@ const WaterList = ({ isAuthenticated }) => {
               ))}
             </List>
           </Box>
-
           <Box mb={3}>
             <Typography variant="h6">Задолженности пользователей</Typography>
             <List>
@@ -253,9 +249,7 @@ const WaterList = ({ isAuthenticated }) => {
               ))}
             </List>
           </Box>
-
           <Divider />
-
           <List>
             {Array.isArray(transactions) && transactions.map((transaction) => (
               <ListItem key={transaction._id}>
@@ -264,9 +258,7 @@ const WaterList = ({ isAuthenticated }) => {
                 <Typography>Начислено: {transaction.amountBilled}</Typography>
                 <Typography>Оплачено: {transaction.amountPaid}</Typography>
                 <Typography>Дата и Время: {new Date(transaction.date).toLocaleString()}</Typography>
-
-                <TransactionItem transaction={transaction} onDelete={() => handleDelete(transaction._id)} />
-
+                <WaterItem transaction={transaction} onDelete={() => handleDelete(transaction._id)} />
                 <Button variant="outlined" color="secondary" onClick={() => handleEditClick(transaction._id)}>
                   Редактировать
                 </Button>
@@ -274,13 +266,12 @@ const WaterList = ({ isAuthenticated }) => {
             ))}
 
             {editingTransactionId && (
-              <EditTransaction transactionId={editingTransactionId} onUpdate={handleUpdate} />
+              <EditWater transactionId={editingTransactionId} onUpdate={handleUpdate} />
             )}
           </List>
-
           {error && <Typography color="error">{error}</Typography>}
     </Container>
   );
 };
 
-export default TransactionList;
+export default WaterList;
