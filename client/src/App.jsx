@@ -12,6 +12,7 @@ import EditTgk from './components/EditTgk';
 import Home from './components/Home';
 import WaterList from './components/WaterList';
 import AddWater from './components/AddWater';
+import EditWater from './components/EditWater
 
 const App = () => {
   return (
@@ -28,7 +29,8 @@ const App = () => {
         <Route path="/edit/:id" element={<><PostForm /><PostList /></>} />
         <Route path="/delete/:id" element={<><PostForm /><PostList /></>} />
         <Route path="/edit-transaction/:id" component={EditTransaction} />
-        <Route path="/edit-tgs/:id" component={EditTgk} />
+        <Route path="/edit-tgk/:id" component={EditTgk} />
+        <Route path="/edit-water/:id" component={EditWater} />
       </Routes>
     </BrowserRouter>
   );
