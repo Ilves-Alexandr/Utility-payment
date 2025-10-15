@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -223,4 +223,4 @@ router.put('/transaction/:id', auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router;*/
