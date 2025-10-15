@@ -5,7 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const auth = require('./routes/auth')
 const posts = require('./routes/posts')
-const transactionRoutes = require('./routes/transactions');
+const transactionRouter = require('./routes/transactions');
 const tgkRouter = require('./routes/tgk');
 const waterRouter = require('./routes/water')
 const usersRouter = require('./routes/users');
@@ -13,7 +13,7 @@ const usersRouter = require('./routes/users');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 // Подключение к MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => console.error(err));
 
 app.use(cors({
-  origin: '*', // Укажите источник или используйте '*'
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -32,7 +32,7 @@ app.use(express.json());
 // Маршруты
 app.use('/api/users', auth);
 app.use('/api/posts', posts);
-app.use('/api', transactionRoutes);
+app.use('/api', transactionRouter);
 app.use('/api', tgkRouter);
 app.use('/api', waterRouter)
 app.use('/api', usersRouter);
