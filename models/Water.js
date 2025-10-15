@@ -4,9 +4,13 @@ const waterSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   amountBilled: { type: Number, required: true },
   amountPaid: { type: Number, required: true },
-  balance: { type: Number, required: true },
-  debt: { type: Number, required: true },
+  balance: { type: Number, default: 0},
+  debt: { type: Number, default: 0},
   date: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Water', waterSchema);
+const Water = mongoose.model('Water', waterSchema);
+module.exports = Water
+
+
+;
