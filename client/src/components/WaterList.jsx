@@ -123,25 +123,6 @@ const WaterList = ({ isAuthenticated }) => {
             {editingTransactionId && (
               <EditWater transactionId={editingTransactionId} onUpdate={handleUpdate} />
             )}
-<Button
-  variant="contained"
-  color="error"
-  onClick={async () => {
-    try {
-      const res = await axios.delete(`${API_URL}/api/waters`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
-      alert(res.data.msg);
-      setTransactions([]); // Очистить локально
-    } catch (err) {
-      console.error(err);
-      alert('Ошибка при удалении');
-    }
-  }}
->
-  Удалить все транзакции
-</Button>
-
           </List>
           {error && <Typography color="error">{error}</Typography>}
     </Container>
