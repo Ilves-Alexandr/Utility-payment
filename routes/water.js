@@ -178,7 +178,7 @@ router.get('/waters', auth, async (req, res) => {
 
 
 // Маршрут для удаления всех транзакций
-router.delete('/waters', async (req, res) => {
+router.delete('/waters', auth, async (req, res) => {
     try {
         const result = await Water.deleteMany({});
         res.json({ msg: `Удалено документов: ${result.deletedCount}` });
@@ -189,7 +189,7 @@ router.delete('/waters', async (req, res) => {
 });
 
 // Удаление транзакции по ID
-router.delete('/water/:id', async (req, res) => {
+router.delete('/water/:id', auth, async (req, res) => {
     const { id } = req.params;
     try {
         const transaction = await Water.findById(id);
@@ -204,7 +204,7 @@ router.delete('/water/:id', async (req, res) => {
     }
 });
 
-router.get('/water/:id', async (req, res) => {
+router.get('/water/:id', auth, async (req, res) => {
     const transactionId = req.params.id;
     try {
         const transaction = await Water.findById(transactionId);
