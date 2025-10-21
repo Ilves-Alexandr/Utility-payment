@@ -204,7 +204,7 @@ router.delete('/tgk/:id', auth, async (req, res) => {
     }
 });
 
-router.get('/tgk/:id', async (req, res) => {
+router.get('/tgk/:id', auth, async (req, res) => {
     const transactionId = req.params.id;
     try {
         const transaction = await Tgk.findById(transactionId);
