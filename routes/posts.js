@@ -42,7 +42,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Получение всех постов
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const posts = await Post.find().populate('user', ['name', 'email']);
     res.json(posts);
@@ -104,7 +104,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Маршрут для удаления всех постов
-router.delete('/', async (req, res) => {
+router.delete('/', auth, async (req, res) => {
   try {
     const result = await Post.deleteMany({});
     res.json({ msg: `Удалено документов: ${result.deletedCount}` });
