@@ -68,14 +68,4 @@ router.post('/login', [
   }
 });
 
-// Маршрут для удаления всех пользователей
-router.delete('/', async (req, res) => {
-  try {
-    const result = await User.deleteMany({});
-    res.json({ msg: `Удалено документов: ${result.deletedCount}` });
-  } catch (err) {
-    console.error('Ошибка при удалении транзакций:', err.message);
-    res.status(500).send('Server error');
-  }
-});
 module.exports = router;
