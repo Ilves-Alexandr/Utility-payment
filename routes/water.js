@@ -189,7 +189,7 @@ router.delete('/waters', async (req, res) => {
 });
 
 // Удаление транзакции по ID
-router.delete('/water/:id', auth, async (req, res) => {
+router.delete('/water/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const transaction = await Water.findById(id);
