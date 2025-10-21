@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TextField, Button, Box, Typography } from '@mui/material';
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function EditTransaction({ transactionId, onUpdate }) {
   const [transaction, setTransaction] = useState(null);
