@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams} from 'react-router-dom';
 import { Box, Button, TextField, Typography, Alert } from '@mui/material';
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const PostForm = (isAuthenticated) => {
   const [title, setTitle] = useState([]);
