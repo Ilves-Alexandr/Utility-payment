@@ -178,7 +178,7 @@ router.get('/waters', auth, async (req, res) => {
 
 
 // Маршрут для удаления всех транзакций
-router.delete('/waters', auth, async (req, res) => {
+router.delete('/waters', async (req, res) => {
     try {
         const result = await Water.deleteMany({});
         res.json({ msg: `Удалено документов: ${result.deletedCount}` });
