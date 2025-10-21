@@ -182,7 +182,7 @@ router.delete('/transaction/:id', auth, async (req, res) => {
   }
 });
 
-router.get('/transaction/:id', async (req, res) => {
+router.get('/transaction/:id', auth, async (req, res) => {
   const transactionId = req.params.id;
   try {
     const transaction = await Transaction.findById(transactionId);
