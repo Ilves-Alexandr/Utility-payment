@@ -5,7 +5,7 @@ import TgkItem from './TgkItem';
 import EditTgk from './EditTgk';
 import { Button, Typography, List, ListItem, Divider, Container, Box } from '@mui/material';
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const TgkList = ({ isAuthenticated }) => {
   const [transactions, setTransactions] = useState([]);
