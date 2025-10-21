@@ -12,7 +12,7 @@ import EditTgk from './components/EditTgk';
 import Home from './components/Home';
 import WaterList from './components/WaterList';
 import AddWater from './components/AddWater';
-import EditWater from './components/EditWater
+import EditWater from './components/EditWater';
 
 const App = () => {
   return (
