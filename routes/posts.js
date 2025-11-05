@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const Post = require('../models/Post');
+const checkRole = require('../middleware/role');
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ function auth(req, res, next) {
 }
 
 // Добавление поста
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, checkRole(['editor', 'admin']), async (req, res) => {
   try {
     const newPost = new Post({
       title: req.body.title,
@@ -42,7 +43,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Получение всех постов
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, checkRole(['viewer', 'editor', 'admin']), async (req, res) => {
   try {
     const posts = await Post.find().populate('user', ['name', 'email']);
     res.json(posts);
@@ -53,7 +54,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Маршрут для получения поста по ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', auth, checkRole(['viewer', 'editor', 'admin']), async (req, res) => {
   try {
     // Найти пост по ID
     let post = await Post.findById(req.params.id);
@@ -71,7 +72,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Маршрут для обновления (редактирования) поста
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', auth, checkRole(['editor', 'admin']), async (req, res) => {
   try {
     // Найти пост по ID
     let post = await Post.findById(req.params.id);
@@ -104,7 +105,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Маршрут для удаления всех постов
-router.delete('/', auth, async (req, res) => {
+router.delete('/', auth, checkRole(['admin']), async (req, res) => {
   try {
     const result = await Post.deleteMany({});
     res.json({ msg: `Удалено документов: ${result.deletedCount}` });
@@ -115,7 +116,7 @@ router.delete('/', auth, async (req, res) => {
 });
 
 // Маршрут для удаления поста
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', auth, checkRole(['editor', 'admin']), async (req, res) => {
   try {
     // Найти пост по ID
     let post = await Post.findById(req.params.id);
