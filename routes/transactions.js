@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const Transaction = require('../models/Transaction');
 const User = require('../models/User')
+const checkRole = require('../middleware/role');
+
 
 dotenv.config();
 
@@ -24,7 +26,7 @@ function auth(req, res, next) {
 }
 
 // Добавить транзакцию и вычислить сальдо и долг
-router.post('/transaction', auth, async (req, res) => {
+router.post('/transaction', auth, checkRole(['editor', 'admin']), async (req, res) => {
   try {
     // Преобразуем входные данные в числа
     const amountBilled = Number(req.body.amountBilled);
@@ -75,7 +77,7 @@ router.post('/transaction', auth, async (req, res) => {
   }
 });
 
-router.get('/transactions', auth, async (req, res) => {
+router.get('/transactions', auth, checkRole(['viewer', 'editor', 'admin']), async (req, res) => {
   try {
     // Получаем общую сумму начисленных средств
     const totalAmountBilled = await Transaction.aggregate([
@@ -156,7 +158,7 @@ router.get('/transactions', auth, async (req, res) => {
 
 
 // Маршрут для удаления всех транзакций
-router.delete('/transactions', auth, async (req, res) => {
+router.delete('/transactions', auth, checkRole(['admin']), async (req, res) => {
   try {
     const result = await Transaction.deleteMany({});
     res.json({ msg: `Удалено документов: ${result.deletedCount}` });
@@ -167,7 +169,7 @@ router.delete('/transactions', auth, async (req, res) => {
 });
 
 // Удаление транзакции по ID
-router.delete('/transaction/:id', auth, async (req, res) => {
+router.delete('/transaction/:id', auth, checkRole(['editor', 'admin']), async (req, res) => {
   const { id } = req.params;
   try {
     const transaction = await Transaction.findById(id);
@@ -182,7 +184,7 @@ router.delete('/transaction/:id', auth, async (req, res) => {
   }
 });
 
-router.get('/transaction/:id', auth, async (req, res) => {
+router.get('/transaction/:id', auth, checkRole(['viewer', 'editor', 'admin']), async (req, res) => {
   const transactionId = req.params.id;
   try {
     const transaction = await Transaction.findById(transactionId);
@@ -196,7 +198,7 @@ router.get('/transaction/:id', auth, async (req, res) => {
 });
 
 //  Редактирование транзакции по ID
-router.put('/transaction/:id', auth, async (req, res) => {
+router.put('/transaction/:id', auth, checkRole(['editor', 'admin']), async (req, res) => {
   const { id } = req.params;
   const { amountBilled, amountPaid } = req.body;
   // Проверка, что amountBilled и amountPaid — это числа
